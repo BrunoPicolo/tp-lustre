@@ -9,7 +9,13 @@ const C : real = 1.0;
 -- (a)
 node controller(temp, target : real) returns (enable: bool);
 let
-  enable = true;
+  enable = (temp > target) -> 
+    if (temp > target + delta) then 
+      true
+    else if (temp < target - delta) then
+      false
+    else
+      pre enable;
 tel
 
 -- (b)
@@ -24,7 +30,7 @@ node environment(enable: bool; tempExt: real) returns (temp: real);
 var TempPrime : real;
 let
   TempPrime = 0.0;
-  temp = 0.0 -- calculer l'integrale de TempPrime avec "h" fixé par vos soins
+  temp = 0.0; -- calculer l'integrale de TempPrime avec "h" fixé par vos soins
 tel
 
 -- (c)
