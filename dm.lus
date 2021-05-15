@@ -1,0 +1,43 @@
+-- NOM_1 : PICOLO ORTIZ
+-- NOM_2 :
+
+const delta : real = 1.0;
+const alpha : real = 1.0;
+const beta : real = 1.0;
+const C : real = 1.0;
+
+-- (a)
+node controller(temp, target : real) returns (enable: bool);
+let
+  enable = true;
+tel
+
+-- (b)
+node integrale(f, h: real) returns (F: real);
+var trapezoid : real;
+let
+  F = 0.0 -> pre(F) + trapezoid;
+  trapezoid = h*(f+pre(f))/2.0 ;
+tel
+
+node environment(enable: bool; tempExt: real) returns (temp: real);
+var TempPrime : real;
+let
+  TempPrime = 0.0;
+  temp = 0.0 -- calculer l'integrale de TempPrime avec "h" fixé par vos soins
+tel
+
+-- (c)
+node main(target, tempExt: real) returns (enabled: bool; temp: real);
+let
+  enabled = controller(temp, target);
+  temp = environment(enabled, tempExt);
+tel
+-- explication : ...
+--
+
+-- (d)
+-- node TestSimulation(...
+
+-- (e)
+-- Une propriété à vérifier pourrait être ...
