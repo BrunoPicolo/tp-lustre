@@ -43,7 +43,7 @@ let
   enabled = controller(temp, target);
   temp = environment(enabled, tempExt);
 tel
--- explication : ...
+-- explication : Il y a une boucle syntaxique entre temp et enabled.
 --
 
 -- (d)
