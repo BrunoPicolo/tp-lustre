@@ -26,16 +26,15 @@ let
   trapezoid = h*(f+pre(f))/2.0 ;
 tel
 
--- TODO : Verify correctness
 node environment(enable: bool; tempExt: real) returns (temp: real);
 var TempPrime : real;
 let
-  TempPrime = 0.0 ->
+  TempPrime = 
     if (enable) then
       alpha * (C - pre temp)
     else
       beta * (tempExt - pre temp);
-  temp = integrale(TempPrime, 1.0); -- calculer l'integrale de TempPrime avec "h" fixé par vos soins
+  temp = tempExt -> integrale(TempPrime, 1.0); -- calculer l'integrale de TempPrime avec "h" fixé par vos soins
 tel
 
 -- (c)
