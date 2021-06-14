@@ -1,5 +1,5 @@
--- NOM_1 : PICOLO ORTIZ
--- NOM_2 :
+-- NOM_1 : PICOLO ORTIZ, Bruno
+-- NOM_2 : POUJOL, Elyan
 
 const delta : real = 1.0;
 const alpha : real = 1.0;
@@ -44,10 +44,21 @@ let
   temp = environment(enabled, tempExt);
 tel
 -- explication : Il y a une boucle syntaxique entre temp et enabled.
---
+node main2(target, tempExt: real) returns (enabled: bool; temp: real);
+let
+  enabled = controller(tempExt -> pre temp, target);
+  temp = environment(enabled, tempExt);
+tel
+-- Au début le climatiseur n'est pas allumé donc la température initiale est la même que la température extérieure (tempExt -> pre temp)
 
 -- (d)
--- node TestSimulation(...
+node TestSimulation(target, temp: real) returns (ok: bool)
+var e: bool, t: real;
+let
+  e,t = main(target, temp);
+  ok = if (temp < target - delta) then (not e) else true;
+tel
 
 -- (e)
 -- Une propriété à vérifier pourrait être ...
+-- ...que si la température extérieure est plus grande que le target alors la temperature devrait diminuer.
